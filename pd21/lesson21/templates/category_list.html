@@ -1,0 +1,20 @@
+{% load static %} <!-- Zadanie 4 -->
+
+<!-- Zadanie 3 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista kategorii</title>
+        <link rel="stylesheet" href="{% static 'lesson21/style.css' %}"> <!-- Zadanie 4 -->
+</head>
+<body>
+    <h1>Kategorie:</h1>
+    <ul>
+        {% for category in categories %}
+            <li>
+                {{ category.name }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

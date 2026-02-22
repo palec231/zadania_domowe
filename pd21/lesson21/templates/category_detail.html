@@ -1,0 +1,20 @@
+<!-- Zadanie 6 / 7-->
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>{{ category.name }}</h1>
+  <h2>Artykuły w tej kategorii:</h2>
+
+{% if category.article_set.all %}
+  <ul>
+    {% for article in category.article_set.all %}
+      <li>
+        {{ article.title }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Brak artykułów w tej kategorii.</p>
+{% endif %}
+</body>
+</html>

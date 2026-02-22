@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Artykuły w naszej bazie:</h1>
+
+  <form method="get">
+    <input type="text" name="q" placeholder="Szukaj po tytule..." value="{{ q|default:'' }}">
+    <button type="submit">Szukaj</button>
+
+    {% if q %}
+      <!-- Zmień nazwę URL na tę, która wskazuje na paginowaną listę -->
+      <a href="{% url 'article_list_pag' %}">Wyczyść</a>
+    {% endif %}
+  </form>
+
+  <ul>
+    {% for article in articles %}
+      <li>
+        {{ article.title }}
+        {% if article.is_new %}
+          <span>(Nowość!)</span>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>Brak wyników.</li>
+    {% endfor %}
+  </ul>
+
+  <!-- PAGINACJA -->
+  <nav>
+    {% if articles.has_previous %}
+      <a href="?{% if q %}q={{ q|urlencode }}&{% endif %}page={{ articles.previous_page_number }}">
+        Poprzednia
+      </a>
+    {% endif %}
+
+    <span>Strona {{ articles.number }} z {{ articles.paginator.num_pages }}</span>
+
+    {% if articles.has_next %}
+      <a href="?{% if q %}q={{ q|urlencode }}&{% endif %}page={{ articles.next_page_number }}">
+        Następna
+      </a>
+    {% endif %}
+  </nav>
+
+  <nav>
+    {% for num in articles.paginator.page_range %}
+      {% if articles.number == num %}
+        <strong>{{ num }}</strong>
+      {% else %}
+        <a href="?{% if q %}q={{ q|urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</body>
+</html>

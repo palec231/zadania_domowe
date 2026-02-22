@@ -1,0 +1,27 @@
+<!-- Zadanie 8 -->
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Artykuły w naszej bazie:</h1>
+  <form method="get">
+    <input type="text" name="q" placeholder="Szukaj po tytule..." value="{{ q|default:'' }}">
+    <button type="submit">Szukaj</button>
+
+    {% if q %}
+      <a href="{% url 'article_list' %}">Wyczyść</a>
+    {% endif %}
+  </form>
+    <ul>
+      {% for article in articles %}
+        <p>
+          <li>
+            {{ article.title }}
+            {% if article.is_new %}
+              <span>(Nowość!)</span>
+            {% endif %}
+          </li>
+        </p>
+      {% endfor %}
+    </ul>
+</body>
+</html>
