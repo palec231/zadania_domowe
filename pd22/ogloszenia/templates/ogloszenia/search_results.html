@@ -1,0 +1,14 @@
+<!-- Zadanie 6 -->
+<h1>Wyniki wyszukiwania{% if query %}: "{{ query }}"{% endif %}</h1>
+
+<ul>
+  {% for post in results %}
+  <li><strong>{{ post.title }}</strong> (Kategoria: {{ post.category.name }}, Autor: {{ post.author }}, Data publikacji: {{ post.published_date }})</li>
+        <span><br>{{ post.content }}<br><br></span>
+    </li>
+  {% empty %}
+    <li>Brak pasujących postów.</li>
+  {% endfor %}
+</ul>
+
+<a href="/">Powrót</a>

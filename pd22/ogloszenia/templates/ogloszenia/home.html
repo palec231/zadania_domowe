@@ -1,0 +1,20 @@
+<!-- Zadanie  6 -->
+ 
+<h3>Wyszukaj we wszystkich artykułach</h3>
+<form method="get" action="{% url 'search' %}">
+  <input type="text" name="q" placeholder="Szukaj..." value="{{ request.GET.q }}">
+  <button type="submit">Szukaj</button>
+</form>
+
+<!-- Zadanie  3 -->
+<h2>Najnowsze 5 artykułów:</h2>
+<ul>
+  {% for post in posts %}
+    <li><strong>{{ post.title }}</strong>    
+        (Kategoria: {{ post.category.name }}, Autor: {{ post.author }}, Data publikacji: {{ post.published_date }})</li>
+        <span><br>{{ post.content }}<br><br></span>
+    </li>
+  {% empty %}
+    <li>Brak postów.</li>
+  {% endfor %}
+</ul>

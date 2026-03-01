@@ -1,0 +1,10 @@
+<!-- Zadanie 2 -->
+<h1>Posty w kategorii {{ category_name }}</h1>
+
+<ul>
+  {% for post in posts %}
+    <li>{{ post.title }}</li>
+  {% empty %}
+    <li>Brak postów w tej kategorii.</li>
+  {% endfor %}
+</ul>
